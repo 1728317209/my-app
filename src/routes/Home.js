@@ -6,7 +6,7 @@ export default function Home() {
   console.log('About -> ref', ref);
   setTimeout(() => {
     // 当 ref 挂载完成，ref.current 将指向 <FancyButton /> 中的 <button /> DOM 节点。
-    // ref 是 LogProps，因为导入的 FancyButton 其实是包着 FancyButton 的 LogProps
+    // ref 是 FancyButton，因为 ref 被作为一个普通的 prop 传给了 LogProps，LogProps 又转发给了 FancyButton
     console.log('About -> ref', ref);
   }, 3000);
   return (
