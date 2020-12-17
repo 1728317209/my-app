@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import logProps from './logProps';
 
 // eslint-disable-next-line react/display-name
 const FancyButton = React.forwardRef((props, ref) => {
@@ -15,4 +16,8 @@ FancyButton.propTypes = {
   children: PropTypes.any.isRequired,
 };
 
-export default FancyButton;
+// 我们导出 LogProps，而不是 FancyButton。
+// 虽然它也会渲染一个 FancyButton。
+export default logProps(FancyButton);
+
+// export default FancyButton;
