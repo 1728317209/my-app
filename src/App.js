@@ -1,30 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Suspense, lazy } from 'react';
 import './App.css';
-import Clock from './components/Clock';
-import Welcome from './components/Welcome';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './routes/Home';
+// import About from './routes/About';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello World</p>
-        <Clock />
-        <Clock />
-        <Clock />
-        <Welcome name="Sara" />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// const Home = lazy(() => import('./routes/Home'));
+const About = lazy(() => import('./routes/About'));
+
+const App = () => (
+  <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+      </Switch>
+    </Suspense>
+  </Router>
+);
 
 export default App;
