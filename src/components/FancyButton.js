@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import logProps from './logProps';
 
-// eslint-disable-next-line react/display-name
-const FancyButton = React.forwardRef((props, ref) => {
+// 如果你命名了渲染函数，DevTools 也将包含其名称（例如 “ForwardRef(myFunction)”）
+const FancyButton = React.forwardRef(function myFunction(props, ref) {
   return (
     <button ref={ref} className="FancyButton">
       {props.children}
