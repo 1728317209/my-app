@@ -1,28 +1,49 @@
 import React from 'react';
+import Table from '../components/Table';
+import ModalParent from '../components/Modal';
 import FancyButton from '../components/FancyButton'; // 这里导入的其实是包着 FancyButton 的 LogProps
 
-export default function Home() {
-  const ref = React.createRef();
-  console.log('About -> ref', ref);
-  setTimeout(() => {
-    // 当 ref 挂载完成，ref.current 将指向 <FancyButton /> 中的 <button /> DOM 节点。
-    // ref 是 FancyButton，因为 ref 被作为一个普通的 prop 传给了 LogProps，LogProps 又转发给了 FancyButton
-    console.log('About -> ref', ref);
-  }, 3000);
-  return (
-    <div>
-      <h1>Home</h1>
-      <FancyButton ref={ref} a={123} b={456}>
-        Click me!
-      </FancyButton>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </div>
-  );
+export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.ref = React.createRef();
+
+    this.state = { showModal: false };
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleHide = this.handleHide.bind(this);
+  }
+
+  handleShow() {
+    this.setState({ showModal: true });
+  }
+
+  handleHide() {
+    this.setState({ showModal: false });
+  }
+
+  render() {
+    return (
+      <div>
+        <div id="modal-root"></div>
+        <h1>Home</h1>
+        <FancyButton ref={this.ref} a={123} b={456}>
+          Click me!
+        </FancyButton>
+        {false && 123}
+        <Table />
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+
+        <button onClick={this.handleShow}>Show modal</button>
+        <ModalParent />
+      </div>
+    );
+  }
 }
