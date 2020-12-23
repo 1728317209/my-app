@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from '../components/Table';
 import ModalParent from '../components/Modal';
+import CustomTextInput from '../components/CustomTextInput';
 import FancyButton from '../components/FancyButton'; // 这里导入的其实是包着 FancyButton 的 LogProps
 
 export default class Home extends React.Component {
@@ -8,10 +9,14 @@ export default class Home extends React.Component {
     super(props);
     this.ref = React.createRef();
 
-    this.state = { showModal: false };
+    this.state = {
+      showModal: false,
+      showCustomTextInput: true,
+    };
 
     this.handleShow = this.handleShow.bind(this);
     this.handleHide = this.handleHide.bind(this);
+    this.handleCustomTextInputShow = this.handleCustomTextInputShow.bind(this);
   }
 
   handleShow() {
@@ -20,6 +25,10 @@ export default class Home extends React.Component {
 
   handleHide() {
     this.setState({ showModal: false });
+  }
+
+  handleCustomTextInputShow() {
+    this.setState({ showCustomTextInput: !this.state.showCustomTextInput });
   }
 
   render() {
@@ -43,6 +52,10 @@ export default class Home extends React.Component {
 
         <button onClick={this.handleShow}>Show modal</button>
         <ModalParent />
+        {this.state.showCustomTextInput && <CustomTextInput />}
+        <button onClick={this.handleCustomTextInputShow}>
+          CustomTextInput show or hide
+        </button>
       </div>
     );
   }
