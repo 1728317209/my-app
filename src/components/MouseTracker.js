@@ -31,6 +31,11 @@ class Mouse extends React.Component {
     });
   }
 
+  // eslint-disable-next-line react/no-deprecated
+  componentWillUpdate(nextProps) {
+    console.log(this.props.render === nextProps.render); // 按理说是 false，但是是 true
+  }
+
   render() {
     return (
       <div style={{ height: '100vh' }} onMouseMove={this.handleMouseMove}>
@@ -41,14 +46,14 @@ class Mouse extends React.Component {
         {/* render prop 是一个用于告知组件需要渲染什么内容的函数 prop */}
         {/* 自组件的state + 父组件的render方法 决定了最终渲染的效果 */}
         {/* 不一定要叫render，其实就是一个普通的函数类型的prop，叫什么名字都可以 比如：show */}
-        {this.props.children(this.state)}
+        {this.props.render(this.state)}
       </div>
     );
   }
 }
 
 Mouse.propTypes = {
-  children: PropTypes.any.isRequired,
+  render: PropTypes.any.isRequired,
 };
 
 export default class MouseTracker extends React.Component {
@@ -57,7 +62,7 @@ export default class MouseTracker extends React.Component {
       <div>
         <h1>移动鼠标!</h1>
         {/* `children` render prop 的好处是可以写成 <Mouse>{children}</Mouse>，更加符合习惯 */}
-        <Mouse>{(mouse) => <Cat mouse={mouse} />}</Mouse>
+        <Mouse render={(mouse) => <Cat mouse={mouse} />} />
       </div>
     );
   }
