@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from '../components/Table';
 import ModalParent from '../components/Modal';
-import { Cat, withMouse } from '../components/MouseTracker';
+import MouseTracker from '../components/MouseTracker';
 import CustomTextInput from '../components/CustomTextInput';
 import FancyButton from '../components/FancyButton'; // 这里导入的其实是包着 FancyButton 的 LogProps
 
@@ -33,7 +33,6 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const MouseTracker = withMouse(Cat);
     return (
       <div>
         <div id="modal-root"></div>

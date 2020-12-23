@@ -41,14 +41,14 @@ class Mouse extends React.Component {
         {/* render prop 是一个用于告知组件需要渲染什么内容的函数 prop */}
         {/* 自组件的state + 父组件的render方法 决定了最终渲染的效果 */}
         {/* 不一定要叫render，其实就是一个普通的函数类型的prop，叫什么名字都可以 比如：show */}
-        {this.props.render(this.state)}
+        {this.props.children(this.state)}
       </div>
     );
   }
 }
 
 Mouse.propTypes = {
-  render: PropTypes.any.isRequired,
+  children: PropTypes.any.isRequired,
 };
 
 export default class MouseTracker extends React.Component {
@@ -56,7 +56,8 @@ export default class MouseTracker extends React.Component {
     return (
       <div>
         <h1>移动鼠标!</h1>
-        <Mouse render={(mouse) => <Cat mouse={mouse} />} />
+        {/* `children` render prop 的好处是可以写成 <Mouse>{children}</Mouse>，更加符合习惯 */}
+        <Mouse>{(mouse) => <Cat mouse={mouse} />}</Mouse>
       </div>
     );
   }
@@ -68,9 +69,7 @@ export function withMouse(Component) {
   return class withMouseComponent extends React.Component {
     render() {
       return (
-        <Mouse
-          render={(mouse) => <Component {...this.props} mouse={mouse} />}
-        />
+        <Mouse>{(mouse) => <Component {...this.props} mouse={mouse} />}</Mouse>
       );
     }
   };
