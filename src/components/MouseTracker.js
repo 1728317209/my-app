@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Cat extends React.Component {
+export class Cat extends React.Component {
   render() {
     const mouse = this.props.mouse;
     return (
@@ -60,4 +60,18 @@ export default class MouseTracker extends React.Component {
       </div>
     );
   }
+}
+
+// 如果你出于某种原因真的想要 HOC，那么你可以轻松实现
+// 使用具有 render prop 的普通组件创建一个！
+export function withMouse(Component) {
+  return class withMouseComponent extends React.Component {
+    render() {
+      return (
+        <Mouse
+          render={(mouse) => <Component {...this.props} mouse={mouse} />}
+        />
+      );
+    }
+  };
 }
