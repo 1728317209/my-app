@@ -5,8 +5,19 @@ import MouseTracker from '../components/MouseTracker';
 import CustomTextInput from '../components/CustomTextInput';
 import FancyButton from '../components/FancyButton'; // 这里导入的其实是包着 FancyButton 的 LogProps
 
-export default class Home extends React.Component {
-  constructor(props) {
+type P = {
+  //
+};
+
+type S = {
+  showModal: boolean;
+  showCustomTextInput: boolean;
+};
+
+export default class Home extends React.Component<P, S> {
+  ref: React.RefObject<HTMLButtonElement>;
+
+  constructor(props: P) {
     super(props);
     this.ref = React.createRef();
 
@@ -20,19 +31,19 @@ export default class Home extends React.Component {
     this.handleCustomTextInputShow = this.handleCustomTextInputShow.bind(this);
   }
 
-  handleShow() {
+  handleShow(): void {
     this.setState({ showModal: true });
   }
 
-  handleHide() {
+  handleHide(): void {
     this.setState({ showModal: false });
   }
 
-  handleCustomTextInputShow() {
+  handleCustomTextInputShow(): void {
     this.setState({ showCustomTextInput: !this.state.showCustomTextInput });
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <div>
         <div id="modal-root"></div>
@@ -42,22 +53,15 @@ export default class Home extends React.Component {
         </FancyButton>
         {false && 123}
         <Table />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
           Learn React
         </a>
 
         <button onClick={this.handleShow}>Show modal</button>
         <ModalParent />
-        <MouseTracker />
         {this.state.showCustomTextInput && <CustomTextInput />}
-        <button onClick={this.handleCustomTextInputShow}>
-          CustomTextInput show or hide
-        </button>
+        <button onClick={this.handleCustomTextInputShow}>CustomTextInput show or hide</button>
+        <MouseTracker />
       </div>
     );
   }

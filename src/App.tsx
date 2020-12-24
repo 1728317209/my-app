@@ -7,7 +7,7 @@ import Home from './routes/Home';
 // const Home = lazy(() => import('./routes/Home'));
 const About = lazy(() => import('./routes/About'));
 
-const App = () => (
+const App = (): JSX.Element => (
   <Router>
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>

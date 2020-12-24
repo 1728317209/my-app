@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default class Table extends React.Component {
-  render() {
+  render(): JSX.Element {
     return (
       <table>
         <tbody>
@@ -15,7 +15,7 @@ export default class Table extends React.Component {
 }
 
 class Columns extends React.Component {
-  render() {
+  render(): JSX.Element {
     return (
       // 这里用 div 会报错：<td> cannot appear as a child of <div>.
       <React.Fragment>

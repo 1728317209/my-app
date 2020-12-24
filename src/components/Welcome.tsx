@@ -6,6 +6,10 @@ Welcome.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-export default function Welcome(props) {
+type P = {
+  name: string;
+};
+
+export default function Welcome(props: P): JSX.Element {
   return <h1>Hello, {props.name}</h1>;
 }

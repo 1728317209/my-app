@@ -1,39 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-export class Cat extends React.Component {
-  render() {
+type M = {
+  x: number;
+  y: number;
+};
+
+export class Cat extends React.Component<{ mouse: M }> {
+  render(): JSX.Element {
     const mouse = this.props.mouse;
-    return (
-      <img
-        src="/cat.jpg"
-        style={{ position: 'absolute', left: mouse.x, top: mouse.y }}
-      />
-    );
+    return <img src="/cat.jpg" style={{ position: 'absolute', left: mouse.x, top: mouse.y }} />;
   }
 }
 
-Cat.propTypes = {
-  mouse: PropTypes.any.isRequired,
+type P = {
+  render: (mouse: M) => React.ReactNode;
 };
 
-class Mouse extends React.Component {
-  constructor(props) {
+type S = M;
+
+class Mouse extends React.Component<P, S> {
+  constructor(props: P) {
     super(props);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.state = { x: 0, y: 0 };
   }
 
-  handleMouseMove(event) {
+  handleMouseMove(event: React.MouseEvent) {
     this.setState({
       x: event.clientX,
       y: event.clientY,
     });
   }
 
-  // eslint-disable-next-line react/no-deprecated
-  componentWillUpdate(nextProps) {
-    console.log(this.props.render === nextProps.render); // 按理说是 false，但是是 true
+  static getDerivedStateFromProps(props: P, state: S) {
+    console.log('getDerivedStateFromProps -> props, state', props, state);
+    return null;
   }
 
   render() {
@@ -52,12 +53,8 @@ class Mouse extends React.Component {
   }
 }
 
-Mouse.propTypes = {
-  render: PropTypes.any.isRequired,
-};
-
 export default class MouseTracker extends React.Component {
-  render() {
+  render(): JSX.Element {
     return (
       <div>
         <h1>移动鼠标!</h1>
@@ -70,12 +67,10 @@ export default class MouseTracker extends React.Component {
 
 // 如果你出于某种原因真的想要 HOC，那么你可以轻松实现
 // 使用具有 render prop 的普通组件创建一个！
-export function withMouse(Component) {
+export function withMouse(Component: typeof React.Component): typeof React.Component {
   return class withMouseComponent extends React.Component {
     render() {
-      return (
-        <Mouse>{(mouse) => <Component {...this.props} mouse={mouse} />}</Mouse>
-      );
+      return <Mouse render={(mouse) => <Component {...this.props} mouse={mouse} />} />;
     }
   };
 }
