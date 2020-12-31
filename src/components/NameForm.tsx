@@ -39,34 +39,63 @@ type S = {
 //   }
 // }
 
-export default class NameForm extends React.Component<P, S> {
-  input: React.RefObject<HTMLInputElement>;
+// export default class NameForm extends React.Component<P, S> {
+//   input: React.RefObject<HTMLInputElement>;
+
+//   constructor(props: P) {
+//     super(props);
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//     this.input = React.createRef();
+//     console.log('NameForm -> constructor -> this.input', this.input);
+//   }
+
+//   handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+//     let value = '';
+//     console.log('NameForm -> handleSubmit -> this.input', this.input);
+//     if (this.input.current) {
+//       value = this.input.current.value;
+//     }
+//     alert('A name was submitted: ' + value);
+//     event.preventDefault();
+//   }
+
+//   render(): JSX.Element {
+//     return (
+//       <form onSubmit={this.handleSubmit}>
+//         <label>
+//           Name:
+//           <input type="text" ref={this.input} />
+//         </label>
+//         <input type="submit" value="Submit" />
+//       </form>
+//     );
+//   }
+// }
+
+export default class FileInput extends React.Component<P, S> {
+  fileInput: React.RefObject<HTMLInputElement>;
 
   constructor(props: P) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.input = React.createRef();
-    console.log('NameForm -> constructor -> this.input', this.input);
+    this.fileInput = React.createRef();
   }
-
   handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
-    let value = '';
-    console.log('NameForm -> handleSubmit -> this.input', this.input);
-    if (this.input.current) {
-      value = this.input.current.value;
-    }
-    alert('A name was submitted: ' + value);
     event.preventDefault();
+    if (this.fileInput.current && this.fileInput.current.files) {
+      alert(`Selected file - ${this.fileInput.current.files[0].name}`);
+    }
   }
 
   render(): JSX.Element {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Name:
-          <input type="text" ref={this.input} />
+          Upload file:
+          <input type="file" ref={this.fileInput} />
         </label>
-        <input type="submit" value="Submit" />
+        <br />
+        <button type="submit">Submit</button>
       </form>
     );
   }
