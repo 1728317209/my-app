@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from '../components/Table';
 import ModalParent from '../components/Modal';
+import NameForm from '../components/NameForm';
 import MouseTracker from '../components/MouseTracker';
 import CustomTextInput from '../components/CustomTextInput';
 import FancyButton from '../components/FancyButton'; // 这里导入的其实是包着 FancyButton 的 LogProps
@@ -51,6 +52,7 @@ export default class Home extends React.Component<P, S> {
         <FancyButton ref={this.ref} a={123} b={456}>
           Click me!
         </FancyButton>
+        <NameForm />
         {false && 123}
         <Table />
         <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
