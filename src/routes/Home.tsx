@@ -50,7 +50,11 @@ export default class Home extends React.Component<P, S> {
         <div id="modal-root"></div>
         <h1>Home</h1>
         <FancyButton ref={this.ref} a={123} b={456}>
-          Click me!
+          <div>Click me!</div>
+          <React.Fragment>
+            <div>Click me!</div>
+            <div>Click me!</div>
+          </React.Fragment>
         </FancyButton>
         <NameForm />
         {false && 123}
