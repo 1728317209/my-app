@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/image/xngProfile.jpg';
+import { ReactComponent as Logo } from '../assets/svg/loading-balls.svg';
 
 type M = {
   x: number;
@@ -9,7 +9,7 @@ type M = {
 export class Cat extends React.Component<{ mouse: M }> {
   render(): JSX.Element {
     const mouse = this.props.mouse;
-    return <img src={logo} style={{ position: 'absolute', left: mouse.x, top: mouse.y }} />;
+    return <Logo style={{ position: 'absolute', left: mouse.x, top: mouse.y }} />;
   }
 }
 
