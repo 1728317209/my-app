@@ -1,4 +1,5 @@
 import React from 'react';
+import './FancyButton.css';
 
 type P = {
   a: number;
@@ -18,7 +19,7 @@ const FancyButton = React.forwardRef<HTMLButtonElement, P>(function myFunction(p
     return params;
   });
   console.log('myFunction -> props', props);
-  return <button ref={ref} className="FancyButton" />;
+  return <button className="fancy-button" ref={ref} />;
 });
 
 // 我们导出 LogProps，而不是 FancyButton。
