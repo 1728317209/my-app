@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.png';
+import logo from '../assets/image/xngProfile.jpg';
 
 type M = {
   x: number;

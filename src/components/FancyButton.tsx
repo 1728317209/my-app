@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './FancyButton.module.css';
+console.log('styles', styles);
 
 type P = {
   a: number;
