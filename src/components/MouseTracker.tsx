@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from './logo.png';
 
 type M = {
   x: number;
@@ -8,7 +9,7 @@ type M = {
 export class Cat extends React.Component<{ mouse: M }> {
   render(): JSX.Element {
     const mouse = this.props.mouse;
-    return <img src="/cat.jpg" style={{ position: 'absolute', left: mouse.x, top: mouse.y }} />;
+    return <img src={logo} style={{ position: 'absolute', left: mouse.x, top: mouse.y }} />;
   }
 }
 
