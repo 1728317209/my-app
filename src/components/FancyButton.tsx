@@ -20,7 +20,7 @@ const FancyButton = React.forwardRef<HTMLButtonElement, P>(function myFunction(p
     return params;
   });
   console.log('myFunction -> props', props);
-  return <button className={styles['fancy-button']} ref={ref} />;
+  return <button className={styles.fancyButton} ref={ref} />;
 });
 
 // 我们导出 LogProps，而不是 FancyButton。
